@@ -1,0 +1,15 @@
+{
+  "initial_capital": 100000.0,
+  "final_equity": 97142.24,
+  "total_return_pct": -2.86,
+  "cagr_pct": -0.73,
+  "max_drawdown_pct": -6.5,
+  "sharpe": -0.28,
+  "sortino": -0.26,
+  "trades": 11,
+  "win_rate_pct": 18.18,
+  "profit_factor": 0.61,
+  "avg_win": 2259.13,
+  "avg_loss": -819.56,
+  "exposure_pct": 33.0
+}

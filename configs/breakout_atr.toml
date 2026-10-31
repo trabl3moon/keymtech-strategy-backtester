@@ -1,0 +1,39 @@
+# Price-action breakout: buy a close above the prior 55-day high while RSI is not overbought.
+# Risk 1% of equity per trade with a 2x ATR stop and a 3R target.
+name = "55-day breakout, ATR risk"
+
+[data]
+files = []
+
+[account]
+initial_capital = 100000
+commission_pct = 0.03
+commission_fixed = 20
+slippage_pct = 0.05
+
+[position_sizing]
+method = "risk_pct"
+risk_pct = 1.0
+
+[indicators]
+hh_55 = { type = "highest", period = 55 }
+ll_20 = { type = "lowest", period = 20 }
+rsi_14 = { type = "rsi", period = 14 }
+atr_14 = { type = "atr", period = 14 }
+
+[entry]
+mode = "all"
+conditions = [
+  { left = "close", op = ">", right = "hh_55" },
+  { left = "rsi_14", op = "<", right = 80 },
+]
+
+[exit]
+mode = "any"
+conditions = [ { left = "close", op = "<", right = "ll_20" } ]
+
+[exits]
+atr_column = "atr_14"
+stop_loss_atr = 2.0
+take_profit_r = 3.0
+max_bars_in_trade = 60

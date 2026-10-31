@@ -1,0 +1,36 @@
+# Trend following: buy when the 20-day SMA crosses above the 50-day SMA, sell on the cross back.
+name = "SMA 20/50 crossover"
+
+[data]
+files = []            # e.g. ["data/SAMPLE.csv"]; empty = synthetic demo data
+date_column = "date"
+
+[account]
+initial_capital = 100000
+commission_pct = 0.03    # percent of trade value, per side
+commission_fixed = 20    # flat fee per order
+slippage_pct = 0.05      # percent, applied against you on every fill
+fractional_shares = false
+
+[position_sizing]
+method = "fixed_fraction"   # fixed_fraction | fixed_qty | risk_pct
+fraction = 0.95
+
+[indicators]
+sma_fast = { type = "sma", period = 20 }
+sma_slow = { type = "sma", period = 50 }
+
+[entry]
+mode = "all"
+conditions = [ { left = "sma_fast", op = "crosses_above", right = "sma_slow" } ]
+
+[exit]
+mode = "any"
+conditions = [ { left = "sma_fast", op = "crosses_below", right = "sma_slow" } ]
+
+[exits]
+stop_loss_pct = 8
+
+[report]
+periods_per_year = 252
+risk_free_rate = 0.0
